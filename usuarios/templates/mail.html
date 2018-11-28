@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Enviar Correo
+{% endblock %}
+
+{% block contenido %}
+    <h1>{{ accion }}Enviar correo</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit" class="btn btn-success">Enviar</button>
+            <a href="{% url 'articulos' %}" class="btn btn-primary">Regresar</a>
+    </form>
+
+{% endblock %}

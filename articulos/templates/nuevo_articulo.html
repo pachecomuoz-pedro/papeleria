@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block titulo %}
+    {{ accion }} Artículo
+{% endblock %}
+
+{% block contenido %}
+    <h1>{{ accion }} Artículo</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ formualario.as_p }}
+        <button type="submit">Guardar</button>
+        <a href="{% url 'articulos' %}">Regresar</a>
+    </form>
+{% endblock %}

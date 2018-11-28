@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block titulo %}
+    Artículos
+{% endblock %}
+
+{% block contenido %}
+    <h1>Lista de Artículos</h1>
+    <a href="{% url 'nuevo_articulo' %}">Nuevo</a>
+    <table width="100%" class="table table-dark">
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio Unitario</th>
+            <th>Cantidad</th>
+            <th>Imagen</th>
+            <th>Opciones</th>
+        </tr>
+        {% for articulo in articulos %}
+            <tr>
+                <td>{{ articulo.nombre }}</td>
+                <td>{{ articulo.descripcion }}</td>
+                <td>{{ articulo.precio }}</td>
+                <td>{{ articulo.cantidad }}</td>
+                <td><img src="{{ articulo.imagen.url }}" width= "80px" alt="{{ articulo.imagen.name }}"></td>
+                <td>
+                    <a href="{% url 'editar_articulo' articulo.id %}">Editar</a>
+                    <a href="{% url 'eliminar_articulo' articulo.id %}">Eliminar</a>
+                    <a href="javascript: eliminarPost({{ articulo.id }})">Eliminar POST</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <form action="{% url 'eliminar_articulo_post' %}" name="formulario" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="" name="id_articulo">
+    </form>
+{% endblock %}
