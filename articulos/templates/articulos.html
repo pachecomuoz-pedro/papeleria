@@ -5,7 +5,7 @@
 
 {% block contenido %}
     <h1>Lista de Artículos</h1>
-    <a href="{% url 'nuevo_articulo' %}">Nuevo</a>
+    <a href="{% url 'nuevo_articulo' %}" class="btn btn-success">Nuevo</a>
     <table width="100%" class="table table-dark">
         <tr>
             <th>Nombre</th>
@@ -23,9 +23,9 @@
                 <td>{{ articulo.cantidad }}</td>
                 <td><img src="{{ articulo.imagen.url }}" width= "80px" alt="{{ articulo.imagen.name }}"></td>
                 <td>
-                    <a href="{% url 'editar_articulo' articulo.id %}">Editar</a>
-                    <a href="{% url 'eliminar_articulo' articulo.id %}">Eliminar</a>
-                    <a href="javascript: eliminarPost({{ articulo.id }})">Eliminar POST</a>
+                    <a href="{% url 'editar_articulo' articulo.id %}" class="btn btn-primary">Editar</a>
+                    <a href="javascript: eliminarModal('{% url 'eliminar_articulo' articulo.id %}', '{{ articulo.nombre }}')" class="btn btn-danger">Eliminar</a>
+                    <a href="javascript: eliminarPost({{ articulo.id }})" class="btn btn-danger">Eliminar POST</a>
                 </td>
             </tr>
         {% endfor %}
@@ -34,4 +34,37 @@
         {% csrf_token %}
         <input type="hidden" value="" name="id_articulo">
     </form>
+
+    <a id="btnModal" class="mb-xs mt-xs mr-xs modal-basic btn btn-primary ocultar" href="#modalHeaderColorPrimary">Primary</a>
+
+    <div id="modalHeaderColorPrimary" class="modal-block modal-header-color modal-block-primary mfp-hide">
+        <section class="panel">
+            <header class="panel-heading">
+                <h2 class="panel-title">Eliminar Artículo</h2>
+            </header>
+            <div class="panel-body">
+                <div class="modal-wrapper">
+                    <div class="modal-icon">
+                        <i class="fa fa-question-circle"></i>
+                    </div>
+                    <div class="modal-text">
+                        <p id="pArticulo"></p>
+                    </div>
+                </div>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <a href="#" id="btnEliminar" class="btn btn-primary modal-confirm">Aceptar</a>
+                        <button class="btn btn-default modal-dismiss">Cancelar</button>
+                    </div>
+                </div>
+            </footer>
+        </section>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {% load staticfiles %}
+    <script src="{% static 'assets/javascripts/ui-elements/examples.modals.js' %}"></script>
 {% endblock %}

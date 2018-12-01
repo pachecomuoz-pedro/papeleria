@@ -69,7 +69,7 @@
 
 	/*
 	Modal Confirm
-	*/
+	
 	$(document).on('click', '.modal-confirm', function (e) {
 		e.preventDefault();
 		$.magnificPopup.close();
@@ -80,6 +80,7 @@
 			type: 'success'
 		});
 	});
+	*/
 
 	/*
 	Form

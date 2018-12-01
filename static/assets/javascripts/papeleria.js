@@ -22,5 +22,11 @@ function eliminarPost(id) {
     var form = document.formulario;
     form.id_articulo.value=id;
     form.submit();
+}
 
+
+function eliminarModal(url, articulo) {
+    document.getElementById('btnEliminar').href=url;
+    document.getElementById('btnModal').click();
+    document.getElementById('pArticulo').innerHTML="¿Estás seguro de eliminar el artículo <strong>" + articulo + "</strong>?";
 }
