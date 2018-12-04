@@ -21,7 +21,12 @@
                 <td>{{ articulo.descripcion }}</td>
                 <td>{{ articulo.precio }}</td>
                 <td>{{ articulo.cantidad }}</td>
-                <td><img src="{{ articulo.imagen.url }}" width= "80px" alt="{{ articulo.imagen.name }}"></td>
+                <td>
+                    {% if articulo.imagen %}
+                        <img src="{{ articulo.imagen.url }}" width= "80px" alt="{{ articulo.imagen.name }}"></td>
+                    {% else %}
+                        <p>No tiene imagen</p>
+                    {% endif %}
                 <td>
                     <a href="{% url 'editar_articulo' articulo.id %}" class="btn btn-primary">Editar</a>
                     <a href="javascript: eliminarModal('{% url 'eliminar_articulo' articulo.id %}', '{{ articulo.nombre }}')" class="btn btn-danger">Eliminar</a>

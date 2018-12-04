@@ -1,5 +1,5 @@
 from django.urls import path
-from articulos.views import lista_articulos,nuevo_articulo,eliminar_articulo,editar_articulo
+from articulos.views import lista_articulos, nuevo_articulo, eliminar_articulo, editar_articulo
 from .views import eliminar_post
 
 urlpatterns = [

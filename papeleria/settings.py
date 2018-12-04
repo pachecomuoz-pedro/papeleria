@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 """
 Django settings for papeleria project.
 
@@ -80,12 +81,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'papeleria',
-        #'USER': 'userpapeleria',
-        #'PASSWORD': 'userpapeleria123',
-        #'HOST': '127.0.0.1',
-        #'PORT': '3306'
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'papeleria',
+        # 'USER': 'userpapeleria',
+        # 'PASSWORD': 'userpapeleria123',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '3306'
     }
 }
 
@@ -122,7 +123,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-from django.urls import reverse_lazy
 
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('login')

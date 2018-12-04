@@ -1,33 +1,37 @@
-from django.shortcuts import render,redirect
+from django.http import HttpResponse
+import simplejson
+from django.shortcuts import render, redirect
 from .models import Empleado, Estado, Municipio
 from .forms import FormEmpleado, EmailForm
 from django.core.mail import EmailMessage
 
+
 def nuevo(request):
     if (request.method == 'POST'):
-       form = FormEmpleado(request.POST)
+        form = FormEmpleado(request.POST)
 
-       id_municipio = request.POST.get('municipio')
+        id_municipio = request.POST.get('municipio')
 
-       if form.is_valid():
-           empleado = form.save()
-           empleado.save()
+        if form.is_valid():
+            empleado = form.save()
+            empleado.save()
 
-           return redirect('empleados')
+            return redirect('empleados')
     else:
         form = FormEmpleado()
-    return render(request, 'nuevo_empleado.html',{'form':form,'accion':'Nuevo'})
+    return render(request, 'nuevo_empleado.html', {'form': form, 'accion': 'Nuevo'})
+
 
 def lista_empleados(context):
     empleados = Empleado.objects.all()
-    return render(context, 'empleados.html',{'empleados':empleados})
+    return render(context, 'empleados.html', {'empleados': empleados})
 
-from django.http import HttpResponse
-import simplejson
-#pip install simplejson
+
+# pip install simplejson
+
 
 def carga_municipio(request):
-    estado = Estado.objects.get(id=request.GET.get('id',''))
+    estado = Estado.objects.get(id=request.GET.get('id', ''))
 
     municipios = Municipio.objects.filter(estado=estado)
     municipiosJson = []
@@ -41,6 +45,7 @@ def carga_municipio(request):
 
     data = simplejson.dumps(municipiosJson)
     return HttpResponse(data, content_type="application/json")
+
 
 def enviar_mail(request):
     if (request.method == 'POST'):
@@ -66,4 +71,4 @@ def enviar_mail(request):
             return redirect('articulos')
     else:
         form = EmailForm()
-    return render(request, 'mail.html',{'form':form})
+    return render(request, 'mail.html', {'form': form})
